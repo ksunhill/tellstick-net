@@ -1,0 +1,23 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+PROJECT(tests)
+ENABLE_TESTING()
+
+SET(SOURCES
+	cppunit.cpp
+	support/message.h
+	support/message.cpp
+	oregonTest.cpp
+	${CMAKE_SOURCE_DIR}/../oregon.c
+)
+
+FIND_LIBRARY(CPPUNIT cppunit)
+
+INCLUDE_DIRECTORIES(support)
+INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/..)
+
+ADD_EXECUTABLE(TestRunner ${SOURCES})
+
+TARGET_LINK_LIBRARIES(TestRunner ${CPPUNIT})
+
+ADD_TEST(cppunit ${CMAKE_CURRENT_BINARY_DIR}/TestRunner)
